@@ -1,0 +1,305 @@
+#proceso {
+  background: #ece4d5;
+  border-block: 1px solid var(--rule);
+}
+
+#proceso .flow-map {
+  --flow-gap: clamp(.65rem, 2.1vw, 1.8rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--flow-gap);
+  margin-block: 2rem 1.25rem;
+}
+
+#proceso .flow-phase {
+  position: relative;
+  min-width: 0;
+  padding: .9rem;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--phase-color);
+  border-radius: .3rem;
+  background: var(--paper);
+}
+
+#proceso .flow-prep { --phase-color: #7f371d; }
+#proceso .flow-extract { --phase-color: #842b50; }
+#proceso .flow-mix { --phase-color: #46572b; }
+#proceso .flow-finish { --phase-color: #4b293d; }
+
+#proceso .flow-phase:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.9rem;
+  inset-inline-start: 100%;
+  width: var(--flow-gap);
+  height: 1px;
+  background: #9e8879;
+}
+
+#proceso .flow-phase-title {
+  margin: .15rem 0 .85rem .3rem;
+  color: var(--phase-color);
+  font: 400 clamp(1.65rem, 2.5vw, 2.3rem)/1 var(--serif);
+}
+
+#proceso .flow-nodes {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: .34rem;
+}
+
+#proceso .flow-nodes::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-block: 1.4rem;
+  inset-inline-start: 1.31rem;
+  width: 1px;
+  background: #bcab9c;
+}
+
+#proceso .flow-nodes a {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: center;
+  gap: .5rem;
+  min-height: 2.85rem;
+  padding: .35rem .4rem;
+  border: 1px solid transparent;
+  border-radius: .3rem;
+  color: var(--ink);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+
+#proceso .flow-nodes a > span {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid #c8b5a6;
+  border-radius: 50%;
+  background: var(--paper-bright);
+  color: var(--phase-color);
+  font-size: .76rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#proceso .flow-nodes a:hover {
+  border-color: var(--phase-color);
+}
+
+#proceso .flow-nodes [aria-selected="true"] {
+  border-color: var(--phase-color);
+  background: var(--phase-color);
+  color: #fff8f0;
+}
+
+#proceso .flow-nodes [aria-selected="true"] > span {
+  border-color: transparent;
+}
+
+#proceso .flow-detail {
+  border: 1px solid #c4ad9d;
+  border-radius: .35rem;
+  background: var(--paper-bright);
+}
+
+#proceso .flow-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: .8rem 1.75rem;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+#proceso .flow-panel + .flow-panel {
+  border-top: 1px solid var(--rule);
+}
+
+#proceso[data-flow-ready] .flow-panel {
+  border-top: 0;
+}
+
+#proceso .flow-panel[hidden],
+#proceso .flow-controls[hidden] {
+  display: none;
+}
+
+#proceso .flow-panel h3 {
+  margin: .28rem 0 .6rem;
+  font: 400 clamp(1.85rem, 3.5vw, 3rem)/1 var(--serif);
+}
+
+#proceso .flow-panel div > p:last-child {
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+#proceso .flow-intro {
+  max-width: 25rem;
+  color: var(--muted);
+}
+
+#proceso .flow-intro .button {
+  min-height: 2.3rem;
+  margin-top: .2rem;
+  color: var(--ink);
+}
+
+#proceso .flow-intro .button:hover { color: var(--rust); }
+
+#proceso .flow-photos {
+  grid-column: 1 / -1;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+#proceso .flow-photos-title {
+  margin-bottom: .65rem;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+#proceso .flow-photo-grid {
+  display: flex;
+  gap: .75rem;
+}
+
+#proceso .flow-photo {
+  width: min(47%, 15rem);
+  color: var(--ink);
+  font-size: .87rem;
+  font-weight: 600;
+  text-decoration-color: var(--rust);
+  text-underline-offset: .2em;
+}
+
+#proceso .flow-photo:hover { color: var(--rust); }
+
+#proceso .flow-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: .25rem;
+  margin-bottom: .35rem;
+}
+
+#proceso .flow-photo-dialog {
+  width: min(34rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: .9rem;
+  border: 1px solid var(--rule);
+  border-radius: .4rem;
+  color: var(--ink);
+  background: var(--paper-bright);
+}
+
+#proceso .flow-photo-dialog::backdrop { background: #23171bd1; }
+#proceso .flow-photo-dialog form { display: flex; justify-content: end; margin-bottom: .6rem; }
+#proceso .flow-photo-dialog img {
+  width: 100%;
+  height: auto;
+  max-height: 70dvh;
+  object-fit: contain;
+  border-radius: .25rem;
+  background: #ede2d4;
+}
+
+#proceso .flow-photo-dialog figcaption { margin-top: .55rem; }
+
+#proceso .flow-kicker {
+  color: var(--rust);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+#proceso .flow-time {
+  display: grid;
+  gap: .25rem;
+  padding: .7rem 1.1rem;
+  border-inline-start: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+#proceso .flow-time strong {
+  color: var(--ink);
+  font: 400 clamp(1.75rem, 3vw, 2.55rem)/1 var(--serif);
+}
+
+#proceso .flow-controls {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: 0 clamp(1rem, 3vw, 2rem) 1rem;
+}
+
+#proceso .flow-controls [aria-disabled="true"] {
+  opacity: .65;
+  cursor: default;
+  pointer-events: none;
+}
+
+#proceso .flow-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem 1rem;
+  margin-top: 1rem;
+}
+
+#proceso .flow-footer p {
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+@media (max-width: 830px) {
+  #proceso .flow-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #proceso .flow-phase:nth-child(2)::after {
+    content: none;
+  }
+}
+
+@media (max-width: 480px) {
+  #proceso .flow-map { margin-block: 1rem; }
+  #proceso .flow-phase { padding: .55rem .35rem; }
+  #proceso .flow-phase-title { margin-bottom: .55rem; font-size: 1.55rem; }
+  #proceso .flow-nodes::before { inset-inline-start: 1rem; }
+
+  #proceso .flow-nodes a {
+    grid-template-columns: 1.45rem minmax(0, 1fr);
+    gap: .32rem;
+    padding-inline: .2rem;
+    font-size: .89rem;
+    hyphens: auto;
+  }
+
+  #proceso .flow-nodes a > span { width: 1.45rem; height: 1.45rem; }
+
+  #proceso .flow-panel { grid-template-columns: 1fr; }
+
+  #proceso .flow-time {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .35rem;
+    padding: .65rem 0 0;
+    border-inline-start: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  #proceso .flow-controls .button { flex: 1; padding-inline: .3rem; }
+}

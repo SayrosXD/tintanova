@@ -110,6 +110,7 @@ button:disabled { cursor: default; opacity: .55; }
 .hero-lede { max-width: 28rem; color: var(--muted); font-size: clamp(1.05rem, 1.45vw, 1.22rem); }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem 1.35rem; margin-top: 1.65rem; }
 .hero-visual { position: relative; height: clamp(25rem, 44vw, 36rem); border-radius: 4px 28% 4px 4px; background: #e9c7a7; overflow: hidden; }
+.hero-visual picture { display: block; height: 100%; }
 .hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 53%; }
 .hero-visual figcaption {
   position: absolute;
@@ -158,11 +159,13 @@ button:disabled { cursor: default; opacity: .55; }
 .section-title { margin-top: .6rem; font: 400 clamp(3.15rem, 6.3vw, 6rem)/.94 var(--serif); letter-spacing: -.025em; }
 
 .lab { border: 1px solid var(--rule); border-radius: .4rem; overflow: hidden; background: #f1e7d9; }
-.lab-toolbar { display: grid; grid-template-columns: 15rem 1fr 1fr; align-items: start; padding: 1.2rem 1.6rem; gap: .85rem 2rem; border-bottom: 1px solid var(--rule); }
-.lab-pigments { display: flex; align-items: center; gap: .62rem; padding: 0; margin: 0; border: 0; }
+.lab-toolbar { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); align-items: start; padding: 1.2rem 1.6rem; gap: .85rem clamp(.8rem, 3vw, 2rem); border-bottom: 1px solid var(--rule); }
+.lab-pigments { display: flex; align-items: center; gap: .4rem; min-width: 0; padding: 0; margin: 0; border: 0; }
 .lab legend, .lab label { display: block; margin-bottom: .4rem; font-size: .87rem; font-weight: 700; }
-.pigment-button { width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 4px solid #f1e7d9; background: var(--ink-color); box-shadow: 0 0 0 1px #b9a69a; transition: box-shadow 150ms ease; }
-.pigment-button[aria-pressed="true"], .pigment-button:hover { box-shadow: 0 0 0 2px var(--ink-color); }
+.pigment-button { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.75rem; padding: .3rem .55rem; border: 1px solid #b8a292; border-radius: 4px; background: transparent; color: var(--ink); font-size: .875rem; font-weight: 700; line-height: 1.15; transition: background-color 150ms ease, border-color 150ms ease; }
+.pigment-button::before { content: ""; flex: none; width: .8rem; height: .8rem; border-radius: 50%; background: var(--ink-color); }
+.pigment-button[aria-pressed="true"] { border-color: var(--ink-color); background: var(--paper-bright); box-shadow: inset 0 0 0 1px var(--ink-color); }
+.pigment-button:hover { background: var(--paper-bright); }
 .lab-surface select { width: 100%; height: 2.6rem; padding: 0 2.35rem 0 .6rem; border: 1px solid #b8a292; border-radius: 4px; appearance: none; color: var(--ink); background: var(--paper-bright); }
 .lab-surface { position: relative; }
 .lab-surface::after { content: ""; pointer-events: none; position: absolute; right: .9rem; bottom: 1rem; width: .45rem; height: .45rem; border: solid currentColor; border-width: 0 1px 1px 0; transform: rotate(45deg); }
@@ -171,7 +174,15 @@ button:disabled { cursor: default; opacity: .55; }
 .lab-work { padding: 1.5rem 1.6rem 1.15rem; }
 .canvas-area { --paper-color: #fffbf2; position: relative; border: 1px solid #d5c5b7; border-radius: 3px; background-color: var(--paper-color); }
 .canvas-area[data-surface="cartulina"] { --paper-color: #efdfc3; }
-.canvas-area[data-surface="acuarela"] { --paper-color: #fff4e6; background-image: radial-gradient(#9b705725 .55px, transparent .75px); background-size: 5px 5px; }
+.canvas-area[data-surface="acuarela"] {
+  --paper-color: #fff4e6;
+  --paper-dot-color: #9b705725;
+  --paper-dot-spacing: 5px;
+  --paper-dot-core: .55px;
+  --paper-dot-edge: .75px;
+  background-image: radial-gradient(var(--paper-dot-color) var(--paper-dot-core), transparent var(--paper-dot-edge));
+  background-size: var(--paper-dot-spacing) var(--paper-dot-spacing);
+}
 .canvas-area canvas { display: block; width: 100%; height: clamp(15rem, 30vw, 23rem); border-radius: 3px; cursor: crosshair; touch-action: none; }
 .canvas-prompt { display: grid; align-content: center; justify-items: center; gap: .75rem; position: absolute; inset: 0; pointer-events: none; color: #765d51; font: 1.8rem/1 var(--serif); }
 .canvas-prompt .pen-icon { transform: scale(1.4) rotate(-42deg); }
@@ -179,34 +190,13 @@ button:disabled { cursor: default; opacity: .55; }
 .lab-caption { display: flex; align-items: center; justify-content: space-between; gap: .9rem 1.5rem; padding-top: .95rem; }
 .lab-caption p { color: var(--muted); }
 .lab-caption .sample-name { color: var(--ink); font: 1.9rem/1.15 var(--serif); }
-.lab-actions { display: flex; gap: .5rem; flex-shrink: 0; }
-
-.process-section { background: #ece4d5; border-block: 1px solid var(--rule); }
-.process-grid { display: grid; grid-template-columns: 5fr 6fr; align-items: start; gap: clamp(2rem, 7.5vw, 8rem); }
-.process-story > p:not(.eyebrow) { margin: 1rem 0 1.35rem; color: var(--muted); max-width: 25rem; }
-.process-steps { border-top: 1px solid #c4b1a1; }
-.process-steps details { border-bottom: 1px solid #c4b1a1; }
-.process-steps summary {
-  display: grid;
-  grid-template-columns: 4.1rem 1fr 1.15rem;
-  align-items: center;
-  gap: .4rem;
-  list-style: none;
-  min-height: 4.25rem;
-  padding: .65rem .25rem;
-  font: 400 clamp(1.58rem, 2.7vw, 2.25rem)/1 var(--serif);
-  cursor: pointer;
-}
-.process-steps summary::-webkit-details-marker { display: none; }
-.process-steps summary:hover { color: var(--rust); }
-.step-number { font: 700 .82rem/1 var(--sans); color: var(--rust); }
-.toggle-mark { position: relative; display: block; width: 1rem; height: 1rem; }
-.toggle-mark::before, .toggle-mark::after { content: ""; position: absolute; inset: 50% 0 auto; height: 1px; background: currentColor; }
-.toggle-mark::after { transform: rotate(90deg); }
-.process-steps details[open] .toggle-mark::after { transform: rotate(0); }
-.process-steps details p { margin: 0 1.25rem 1.2rem 4.75rem; color: var(--muted); }
+.lab-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.lab-actions .button { min-height: 2.75rem; }
 
 .evidence-section { padding-bottom: 0; }
+.evidence-actions { max-width: 24rem; color: var(--muted); }
+.evidence-actions .button { min-height: 2.3rem; margin-top: .25rem; color: var(--ink); }
+.evidence-actions .button:hover { color: var(--rust); }
 .results-list { border-top: 1px solid var(--rule); }
 .result-row { display: grid; grid-template-columns: 2.2rem minmax(8rem, .35fr) 1fr; gap: .95rem; align-items: center; border-bottom: 1px solid var(--rule); padding-block: 1.2rem; }
 .result-row .ink-chip { width: 1.7rem; height: 1.7rem; }
@@ -228,7 +218,6 @@ button:disabled { cursor: default; opacity: .55; }
 
 @media (max-width: 900px) {
   .hero-actions { gap: .35rem .95rem; }
-  .lab-toolbar { grid-template-columns: 10rem 1fr 1fr; }
 }
 @media (max-width: 720px) {
   html { scroll-padding-top: 7.1rem; }
@@ -245,10 +234,10 @@ button:disabled { cursor: default; opacity: .55; }
   .pigment-link strong { font-size: 1.35rem; }
   .pigment-link small { font-size: .78rem; }
   .section-intro { display: grid; }
-  .process-grid { grid-template-columns: 1fr; gap: 1.8rem; }
-  .lab-toolbar { grid-template-columns: 1fr 1fr; gap: .8rem 1.2rem; padding: 1rem; }
+  .lab-section .section-intro { gap: .75rem; margin-bottom: 1.15rem; }
+  .lab-toolbar { grid-template-columns: 1fr 1fr; gap: .55rem .8rem; padding: .75rem; }
   .lab-pigments { grid-column: 1 / -1; }
-  .lab-work { padding: 1rem; }
+  .lab-work { padding: .75rem; }
   .lab-caption { flex-wrap: wrap; }
   .dossier { grid-template-columns: 1fr; }
   .dossier-image { min-height: 20rem; }
@@ -264,10 +253,14 @@ button:disabled { cursor: default; opacity: .55; }
   .pigment-plus { display: block; }
   .result-row { grid-template-columns: 1.8rem 1fr; gap: .6rem; }
   .result-row p { grid-column: 2; }
-  .process-steps details p { margin-inline-start: 3.85rem; }
-  .process-steps summary { grid-template-columns: 3.2rem 1fr 1rem; }
 }
 @media (max-width: 380px) {
+  .lab-pigments { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .3rem; }
+  .pigment-button { flex-direction: column; gap: .25rem; padding: .3rem .15rem; }
+  .lab-surface select { padding-right: 1.4rem; font-size: .875rem; }
+  .lab-surface::after { right: .55rem; }
+  .lab-actions { gap: .35rem; }
+  .lab-actions .button { padding-inline: .55rem; }
   .site-header .brand { gap: .4rem; }
   .site-header .brand img { width: 2.2rem; height: 2.2rem; }
   .site-header .brand > span { font-size: 1.58rem; }
