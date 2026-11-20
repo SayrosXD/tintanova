@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ficha técnica de TintaNova, prototipo universitario de tintas de origen vegetal. Resultados preliminares, proceso agroindustrial, balance de materia y costos.">
+  <meta name="theme-color" content="#f9f4e9">
+  <title>Ficha del proyecto | TintaNova</title>
+  <link rel="icon" href="assets/logo.webp" type="image/webp">
+  <link rel="preload" href="assets/instrument.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="balance.js" defer></script>
+  <style>
+    .project-dossier {
+      --dossier-accent: #a84423;
+      --dossier-line: #d8c9b9;
+      --dossier-card: #f4ebdd;
+      --dossier-ink: #301b23;
+    }
+
+    .project-dossier .dossier-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(16rem, 1fr);
+      gap: clamp(2rem, 8vw, 7rem);
+      align-items: end;
+      padding-block: clamp(3.75rem, 9vw, 7.5rem) 2.75rem;
+    }
+
+    .project-dossier h1 {
+      max-width: 18ch;
+      margin: 0.25rem 0 1rem;
+      color: var(--dossier-ink);
+      font: 400 clamp(3.2rem, 8.2vw, 7.4rem)/0.92 "Instrument Serif", Georgia, serif;
+      letter-spacing: -0.045em;
+    }
+
+    .project-dossier h2 { margin-bottom: 1rem; }
+    .project-dossier h3 { margin: 0 0 0.55rem; }
+    .project-dossier p + h3 { margin-top: 1.5rem; }
+
+    .project-dossier .dossier-intro p:last-child {
+      max-width: 54ch;
+      margin: 0;
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    }
+
+    .project-dossier .dossier-meta {
+      margin: 0;
+      border-top: 1px solid var(--dossier-line);
+    }
+
+    .dossier-meta div {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--dossier-line);
+    }
+
+    .dossier-meta dt { font-weight: 700; }
+    .dossier-meta dd { margin: 0.15rem 0 0; }
+
+    .project-dossier .dossier-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1.45rem;
+      padding-block: 0.4rem;
+      border-block: 1px solid var(--dossier-line);
+    }
+
+    .project-dossier .dossier-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .project-dossier a:not(.button) {
+      color: var(--dossier-accent);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+    }
+
+    .project-dossier .dossier-chapter {
+      min-width: 0;
+      padding-block: clamp(3rem, 6vw, 5.5rem);
+    }
+
+    .project-dossier .dossier-chapter + .dossier-chapter { border-top: 1px solid var(--dossier-line); }
+    .project-dossier .dossier-chapter > p { max-width: 78ch; }
+
+    .project-dossier .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.6rem;
+    }
+
+    .project-dossier .dossier-grid > article {
+      border-top: 5px solid var(--tone, var(--dossier-ink));
+      background: var(--dossier-card);
+      padding: clamp(1rem, 2.4vw, 1.6rem);
+    }
+
+    .dossier-grid p:last-child { margin-bottom: 0; }
+    .project-dossier .dossier-botanical { margin: 0 0 1.1rem; }
+
+    .project-dossier .dossier-split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1.5rem, 5vw, 4.15rem);
+    }
+
+    .project-dossier .dossier-details {
+      margin-top: 1.6rem;
+      border-block: 1px solid var(--dossier-line);
+    }
+
+    .project-dossier .dossier-details summary {
+      min-height: 44px;
+      padding-block: 0.8rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .project-dossier .dossier-details > div,
+    .project-dossier .dossier-details > figure { margin: 0 0 1.35rem; }
+
+    .project-dossier .dossier-details figcaption { margin-top: 0.65rem; }
+    .project-dossier .dossier-diagram {
+      display: block;
+      width: min(100%, 620px);
+      height: auto;
+      border: 1px solid var(--dossier-line);
+    }
+
+    .project-dossier .dossier-process,
+    .project-dossier .dossier-list { padding-inline-start: 1.35rem; }
+    .project-dossier .dossier-process li,
+    .project-dossier .dossier-list li { margin-block: 0.65rem; }
+    .project-dossier .dossier-process li::marker { color: var(--dossier-accent); font-weight: 700; }
+
+    .project-dossier .dossier-balance,
+    .project-dossier .dossier-costs {
+      min-width: 0;
+      background: var(--dossier-card);
+      padding: clamp(1rem, 3.6vw, 2rem);
+    }
+
+    .project-dossier .dossier-simulator {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--dossier-line);
+    }
+
+    .dossier-simulator-control,
+    .dossier-simulator-scale {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.2rem 0.8rem;
+    }
+
+    .dossier-simulator label,
+    .dossier-simulator output { font-weight: 700; }
+
+    .dossier-simulator input {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      margin: 0;
+      accent-color: var(--dossier-accent);
+    }
+
+    .dossier-simulator-scale {
+      color: var(--dossier-ink);
+      font-size: 0.875rem;
+    }
+
+    .dossier-simulator-description { margin-block: 0.45rem; font-size: 0.9375rem; }
+
+    .project-dossier .dossier-bar {
+      display: flex;
+      height: 0.8rem;
+      overflow: hidden;
+      border-radius: 1rem;
+      margin-block: 1.4rem 0.9rem;
+      gap: 0.15rem;
+    }
+
+    .dossier-bar span:nth-child(1) { flex: 42; background: #8f3559; }
+    .dossier-bar span:nth-child(2) { flex: 53; background: #526344; }
+    .dossier-bar span:nth-child(3) { flex: 5; background: #ac6e35; }
+
+    .project-dossier table {
+      width: 100%;
+      margin-block: 1rem;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .project-dossier table th,
+    .project-dossier table td {
+      padding: 0.6rem 0;
+      text-align: start;
+      border-bottom: 1px solid var(--dossier-line);
+    }
+
+    .project-dossier table td { padding-inline-start: 0.5rem; text-align: end; white-space: nowrap; }
+    .project-dossier table tbody th { font-weight: 500; }
+    .project-dossier table tfoot { font-weight: 700; }
+
+    .project-dossier .dossier-note {
+      padding: 1.15rem 1.35rem;
+      border-inline-start: 4px solid var(--dossier-accent);
+      background: var(--dossier-card);
+    }
+
+    .project-dossier .dossier-note p { margin: 0; }
+    .project-dossier .dossier-reading { overflow-wrap: anywhere; }
+
+    .dossier-footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem 2rem;
+      margin-top: 0.25rem;
+      padding-block: 1.75rem;
+      border-top: 1px solid #d8c9b9;
+    }
+
+    .dossier-footer p { margin: 0; }
+    .dossier-footer a { text-decoration: underline; text-underline-offset: 0.22em; }
+
+    @media (max-width: 760px) {
+      .project-dossier .dossier-intro,
+      .project-dossier .dossier-grid,
+      .project-dossier .dossier-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="TintaNova, inicio">
+        <img src="assets/logo.webp" width="44" height="44" alt="">
+        <span>TintaNova<span class="brand-note">TINTA VEGETAL</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="index.html#pigmentos">Pigmentos</a>
+        <a href="index.html#proceso">Proceso</a>
+        <a href="index.html#resultados">Resultados</a>
+      </nav>
+      <a class="button button-small button-outline" href="index.html#laboratorio"><span class="pen-icon" aria-hidden="true"></span>Probar la tinta</a>
+    </div>
+  </header>
+
+  <main id="contenido" class="shell project-dossier">
+    <section class="dossier-intro" aria-labelledby="titulo">
+      <div>
+        <p class="eyebrow">Ingeniería Agroindustrial · UNFLEP</p>
+        <h1 id="titulo">Ficha del proyecto</h1>
+        <p>¿Cómo convertir los pigmentos de zanahoria, remolacha y espinaca en tintas de base acuosa con color visible, fluidez y adherencia sobre papel?</p>
+      </div>
+      <dl class="dossier-meta">
+        <div><dt>Asignatura</dt><dd>Prácticas Integradoras II</dd></div>
+        <div><dt>Etapa</dt><dd>Prototipo de laboratorio · 2026</dd></div>
+        <div><dt>Presentación propuesta</dt><dd>Frasco gotero de vidrio de 30 mL</dd></div>
+      </dl>
+    </section>
+
+    <nav class="dossier-nav" aria-label="En esta página">
+      <a href="#resultados">Resultados</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#balance">Balance y costos</a>
+      <a href="#alcance">Validación pendiente</a>
+      <a href="#referencias">Referencias</a>
+    </nav>
+
+    <section class="section dossier-chapter" id="resultados" aria-labelledby="titulo-resultados">
+      <p class="eyebrow">Pruebas preliminares</p>
+      <h2 class="section-title" id="titulo-resultados">Cómo se comportó cada tinta</h2>
+      <p>El equipo ensayó las tres formulaciones sobre papel. Los hallazgos corresponden a la primera etapa de desarrollo del prototipo.</p>
+
+      <div class="dossier-grid">
+        <article style="--tone: #bf722b">
+          <h3>Ámbar-Naranja</h3>
+          <p class="dossier-botanical">Zanahoria · β-caroteno<br><i lang="la">Daucus carota</i> L.</p>
+          <p>Amarillo anaranjado brillante, fluidez media y buena dispersión con espesante. Secó en <strong>3–4 min</strong> sobre papel bond.</p>
+        </article>
+        <article style="--tone: #8f3559">
+          <h3>Carmín-Violeta</h3>
+          <p class="dossier-botanical">Remolacha · Betanina<br><i lang="la">Beta vulgaris</i> L.</p>
+          <p>Rojo intenso a magenta. El equipo observó un trazo continuo y homogéneo, sin sedimentos visibles durante la prueba.</p>
+        </article>
+        <article style="--tone: #526344">
+          <h3>Verde Bosque</h3>
+          <p class="dossier-botanical">Espinaca · Clorofilas a y b<br><i lang="la">Spinacia oleracea</i> L.</p>
+          <p>Tono verde oliva a verde vegetal obtenido mediante extracción en frío. El informe recomienda proteger el envase de la luz.</p>
+        </article>
+      </div>
+
+      <details class="dossier-details">
+        <summary>Consultar la ficha de evaluación propuesta</summary>
+        <div>
+          <p>La ficha propone aplicar las muestras codificadas sobre papel bond blanco de 75 g/m² y cartulina opalina, con una escala de 1 a 5 para los siguientes atributos.</p>
+          <ul class="dossier-list">
+            <li><strong>Intensidad.</strong> Saturación y nitidez del color tras el secado.</li>
+            <li><strong>Uniformidad.</strong> Presencia de grumos, partículas o separación de fases.</li>
+            <li><strong>Facilidad de aplicación.</strong> Fluidez con pincel o plumilla.</li>
+            <li><strong>Velocidad de secado.</strong> Tiempo hasta que el trazo seca al tacto.</li>
+            <li><strong>Adherencia y acabado.</strong> Fijación del pigmento a las fibras del papel.</li>
+          </ul>
+          <p>La ficha incluida en el informe es un formato de registro. Los resultados preliminares son descriptivos e incluyen el tiempo de secado de la variante de zanahoria.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="section dossier-chapter" id="proceso" aria-labelledby="titulo-proceso">
+      <p class="eyebrow">Operaciones de laboratorio</p>
+      <h2 class="section-title" id="titulo-proceso">De la hortaliza al frasco</h2>
+      <div class="dossier-split">
+        <div>
+          <p>El diseño agroindustrial describe diez etapas. El vehículo acuoso y el espesante se incorporan al extracto para ajustar la consistencia de la tinta.</p>
+          <ol class="dossier-process">
+            <li>Recepción y selección</li>
+            <li>Lavado y desinfección</li>
+            <li>Troceado</li>
+            <li>Extracción del pigmento</li>
+            <li>Filtración del extracto</li>
+            <li>Concentración y ajuste</li>
+            <li>Formulación con vehículo acuoso y espesante</li>
+            <li>Homogeneización</li>
+            <li>Envasado y etiquetado</li>
+            <li>Control de calidad y almacenamiento</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Qué se controla</h3>
+          <p>El protocolo incluye el color, la homogeneidad tras 24 horas de reposo, la fluidez, la continuidad del trazo, el tiempo de secado y la estabilidad en almacenamiento.</p>
+          <h3>Aprovechamiento de materiales</h3>
+          <p>El proyecto propone compostar el bagazo limpio que queda en la filtración y recuperar los frascos de vidrio para reutilizarlos.</p>
+          <details class="dossier-details">
+            <summary>Ver el diagrama original</summary>
+            <figure>
+              <img class="dossier-diagram" src="assets/diagrama-proceso.webp" width="1750" height="2112" loading="lazy" alt="Diagrama de las diez etapas descritas en esta sección, desde la recepción de hortalizas hasta el control de calidad.">
+              <figcaption><a href="assets/diagrama-proceso.webp">Abrir diagrama a tamaño completo</a></figcaption>
+            </figure>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dossier-chapter" id="balance" aria-labelledby="titulo-balance">
+      <p class="eyebrow">Datos del informe</p>
+      <h2 class="section-title" id="titulo-balance">Balance y costos</h2>
+      <div class="dossier-split">
+        <article class="dossier-balance" id="balance-materia">
+          <h3>Balance de una corrida de referencia</h3>
+          <p>La corrida de referencia parte de <strong>1&nbsp;000 g de hortaliza fresca</strong>. Las proporciones pueden variar con la humedad del vegetal.</p>
+          <div class="dossier-simulator" hidden>
+            <div class="dossier-simulator-control">
+              <label for="masa-vegetal">Simular otra masa de hortaliza</label>
+              <output for="masa-vegetal" id="masa-seleccionada" aria-live="off">1&nbsp;000 g</output>
+            </div>
+            <input id="masa-vegetal" type="range" min="500" max="2000" step="100" value="1000" aria-describedby="masa-ayuda">
+            <div class="dossier-simulator-scale" aria-hidden="true"><span>500 g</span><span>2&nbsp;000 g</span></div>
+            <p class="dossier-simulator-description" id="masa-ayuda">Simulación didáctica con las proporciones del lote de referencia. El rendimiento a otras escalas sigue por comprobar.</p>
+          </div>
+          <div class="dossier-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <table aria-label="Flujos de masa calculados con las proporciones de referencia">
+            <tbody>
+              <tr><th scope="row">Extracto filtrado</th><td><span data-mass-share="42">420 g</span> · 42 %</td></tr>
+              <tr><th scope="row">Bagazo</th><td><span data-mass-share="53">530 g</span> · 53 %</td></tr>
+              <tr><th scope="row">Pérdidas de proceso</th><td><span data-mass-share="5">50 g</span> · 5 %</td></tr>
+            </tbody>
+          </table>
+          <p aria-live="polite" aria-atomic="true">Tinta estimada <strong><span data-mass-share="50">500 g</span></strong> al sumar <span data-mass-share="8">80 g</span> de vehículo y espesante al extracto.</p>
+        </article>
+
+        <article class="dossier-costs">
+          <h3>Costos directos estimados</h3>
+          <p>Presupuesto de materiales e insumos para <strong>tres frascos de 30 mL</strong>, uno por color. Importes en córdobas nicaragüenses.</p>
+          <table aria-label="Costos directos estimados por lote de tres frascos">
+            <tbody>
+              <tr><th scope="row">Hortalizas</th><td>C$ 120,00</td></tr>
+              <tr><th scope="row">Frascos de vidrio</th><td>C$ 75,00</td></tr>
+              <tr><th scope="row">Etiquetas</th><td>C$ 36,00</td></tr>
+              <tr><th scope="row">Insumos auxiliares</th><td>C$ 20,00</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th scope="row">Total de materiales</th><td>C$ 221,00</td></tr>
+            </tfoot>
+          </table>
+          <p>Equivale a <strong>C$ 73,67 de costo directo por frasco</strong>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dossier-chapter" id="alcance" aria-labelledby="titulo-alcance">
+      <p class="eyebrow">Alcance del prototipo</p>
+      <h2 class="section-title" id="titulo-alcance">Validación pendiente</h2>
+      <div class="dossier-split">
+        <ul class="dossier-list">
+          <li>Estudiar la estabilidad y la vida útil durante 60 a 90 días, comparando vidrio ámbar y transparente.</li>
+          <li>Medir la viscosidad y el color mediante instrumentos en varios lotes para definir rangos de aceptación.</li>
+          <li>Probar el aplicador con estudiantes y docentes en un piloto de uso.</li>
+        </ul>
+        <aside class="dossier-note" aria-label="Uso previsto">
+          <h3>Uso previsto</h3>
+          <p>Aplicación con gotero, pincel o plumilla sobre papel y cartulina. El prototipo es exclusivamente para uso gráfico. Queda pendiente evaluar la biodegradabilidad y verificar los requisitos de seguridad y etiquetado antes de una eventual comercialización.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section dossier-chapter dossier-reading" id="referencias" aria-labelledby="titulo-referencias">
+      <p class="eyebrow">Fuentes</p>
+      <h2 class="section-title" id="titulo-referencias">Referencias</h2>
+      <p>Los resultados, el proceso, el balance y el presupuesto proceden del informe universitario <cite>Elaboración de tinta de origen vegetal a partir de zanahoria, remolacha y espinaca</cite> (UNFLEP, 2026).</p>
+      <ul class="dossier-list">
+        <li>Rodríguez-Mena et al. (2023). Clasificación y extracción de pigmentos vegetales. <a href="https://www.sciencedirect.com/science/article/pii/S0308814622018702">Food Chemistry</a>.</li>
+        <li>Sharma et al. (2012). Composición y procesamiento de la zanahoria. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3550877/">Journal of Food Science and Technology</a>.</li>
+        <li>Sadowska-Bartosz y Bartosz (2021). Propiedades y aplicaciones de las betalainas. <a href="https://www.mdpi.com/1420-3049/26/9/2520">Molecules</a>.</li>
+        <li>Ebrahimi et al. (2023). Composición, extracción y estabilidad de las clorofilas. <a href="https://www.mdpi.com/2223-7747/12/7/1533">Plants</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="shell dossier-footer">
+    <p>TintaNova · Universidad Nacional Francisco Luis Espinoza Pineda</p>
+    <a href="index.html">Volver a TintaNova</a>
+  </footer>
+</body>
+</html>

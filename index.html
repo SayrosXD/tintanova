@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9f4e9">
+  <meta name="description" content="TintaNova es un prototipo universitario de tintas vegetales. Explora tres pigmentos, dibuja en el laboratorio digital y consulta los resultados del proyecto.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_NI">
+  <meta property="og:title" content="TintaNova · Tintas de origen vegetal">
+  <meta property="og:description" content="Prueba tres pigmentos en el laboratorio digital y explora el proyecto de Ingeniería Agroindustrial de la UNFLEP.">
+  <meta property="og:url" content="https://sayrosxd.github.io/tintanova/">
+  <meta property="og:image" content="https://sayrosxd.github.io/tintanova/assets/hero.webp">
+  <meta property="og:image:alt" content="Pincelada ámbar sobre papel junto a un gotero, zanahorias, remolacha y espinaca.">
+  <title>TintaNova · Tintas de origen vegetal</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp">
+  <link rel="preload" href="assets/instrument.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="lab.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#inicio" aria-label="TintaNova, inicio">
+        <img src="assets/logo.webp" width="44" height="44" alt="">
+        <span>TintaNova<span class="brand-note">TINTA VEGETAL</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#pigmentos">Pigmentos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#resultados">Resultados</a>
+      </nav>
+      <a class="button button-small button-outline" href="#laboratorio"><span class="pen-icon" aria-hidden="true"></span>Probar la tinta</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero shell" id="inicio" aria-labelledby="titulo">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> Proyecto universitario · UNFLEP</p>
+        <h1 id="titulo">El color<br> tiene <em>raíces.</em></h1>
+        <p class="hero-lede">Tres hortalizas, tres tintas. Extraemos color de la zanahoria, la remolacha y la espinaca para crear tintas con las que puedes dibujar y escribir sobre papel.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#laboratorio"><span class="pen-icon" aria-hidden="true"></span> Abrir el laboratorio</a>
+          <a class="button button-text" href="proyecto.html">Ver ficha del proyecto</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="assets/hero.webp" width="1254" height="1254" fetchpriority="high" alt="Composición de zanahoria, remolacha y espinaca con un frasco de tinta y una pincelada ámbar sobre papel.">
+        <figcaption><span aria-hidden="true" class="visual-dot"></span> Ilustración del concepto</figcaption>
+      </figure>
+    </section>
+
+    <section class="palette-bar" id="pigmentos" aria-label="Explora los tres pigmentos">
+      <div class="shell pigment-grid">
+        <a href="#laboratorio" class="pigment-link" data-select-pigment="zanahoria">
+          <span class="ink-chip carrot" aria-hidden="true"></span>
+          <span><strong>Ámbar-naranja</strong><small>Zanahoria · β-caroteno</small></span>
+          <span class="pigment-plus" aria-hidden="true">+</span>
+        </a>
+        <a href="#laboratorio" class="pigment-link" data-select-pigment="remolacha">
+          <span class="ink-chip beet" aria-hidden="true"></span>
+          <span><strong>Carmín-violeta</strong><small>Remolacha · Betanina</small></span>
+          <span class="pigment-plus" aria-hidden="true">+</span>
+        </a>
+        <a href="#laboratorio" class="pigment-link" data-select-pigment="espinaca">
+          <span class="ink-chip spinach" aria-hidden="true"></span>
+          <span><strong>Verde bosque</strong><small>Espinaca · Clorofilas a y b</small></span>
+          <span class="pigment-plus" aria-hidden="true">+</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section shell lab-section" id="laboratorio" aria-labelledby="lab-title">
+      <div class="section-intro">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> Laboratorio digital</p>
+          <h2 class="section-title" id="lab-title">Haz tu primer <em>trazo.</em></h2>
+        </div>
+        <p>Elige un pigmento y un papel, ajusta el pincel y dibuja. Puedes llevarte tu muestra como imagen.</p>
+      </div>
+      <div class="lab">
+        <div class="lab-toolbar">
+          <fieldset class="lab-pigments">
+            <legend>Pigmento</legend>
+            <button type="button" class="pigment-button carrot" data-pigment="zanahoria" aria-label="Zanahoria, ámbar-naranja" aria-pressed="true"></button>
+            <button type="button" class="pigment-button beet" data-pigment="remolacha" aria-label="Remolacha, carmín-violeta" aria-pressed="false"></button>
+            <button type="button" class="pigment-button spinach" data-pigment="espinaca" aria-label="Espinaca, verde bosque" aria-pressed="false"></button>
+          </fieldset>
+          <div class="lab-surface">
+            <label for="superficie">Superficie</label>
+            <select id="superficie">
+              <option value="papel">Papel bond</option>
+              <option value="cartulina">Cartulina opalina</option>
+              <option value="acuarela">Papel acuarela</option>
+            </select>
+          </div>
+          <div class="lab-width">
+            <label for="trazo">Grosor <output for="trazo" id="valor-trazo">8 px</output></label>
+            <input type="range" id="trazo" min="2" max="24" value="8">
+          </div>
+        </div>
+        <div class="lab-work">
+          <div class="canvas-area" data-surface="papel">
+            <canvas id="lienzo" tabindex="0" aria-label="Lienzo para dibujar" aria-describedby="ayuda-lienzo">El laboratorio usa un lienzo interactivo compatible con navegadores actuales.</canvas>
+            <div class="canvas-prompt" aria-hidden="true"><span class="pen-icon"></span><span>Dibuja aquí</span></div>
+          </div>
+          <div class="lab-caption">
+            <div>
+              <p class="sample-name" id="muestra-nombre">Ámbar-naranja</p>
+              <p id="muestra-descripcion">Zanahoria · β-caroteno. En el ensayo preliminar secó en 3–4 min sobre papel bond.</p>
+            </div>
+            <div class="lab-actions">
+              <button type="button" class="button button-small button-outline" id="limpiar-lienzo">Limpiar</button>
+              <button type="button" class="button button-small button-primary" id="descargar-muestra">Guardar PNG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="lab-note" id="ayuda-lienzo">Simulación visual de los tonos. Con teclado, usa las flechas para mover el pincel, Mayús + flechas para trazar y Espacio para marcar.</p>
+      <p class="sr-only" id="estado-lienzo" role="status"></p>
+      <noscript><p>Activa JavaScript para dibujar, cambiar el pincel y descargar tu muestra.</p></noscript>
+    </section>
+
+    <section class="process-section" id="proceso" aria-labelledby="process-title">
+      <div class="section shell process-grid">
+        <div class="process-story">
+          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> Ingeniería agroindustrial</p>
+          <h2 class="section-title" id="process-title">De la huerta <em>al papel.</em></h2>
+          <p>El equipo diseñó un proceso de diez etapas a escala de laboratorio. Escoge una fase para seguir el recorrido de los pigmentos hasta el frasco.</p>
+          <a class="button button-small button-outline" href="proyecto.html#proceso">Consultar metodología</a>
+        </div>
+        <div class="process-steps">
+          <details name="fases" open>
+            <summary><span class="step-number">01–03</span><span>Preparar las hortalizas</span><span class="toggle-mark" aria-hidden="true"></span></summary>
+            <p>Seleccionar vegetales frescos, lavarlos, desinfectarlos y trocearlos para facilitar la extracción.</p>
+          </details>
+          <details name="fases">
+            <summary><span class="step-number">04–06</span><span>Extraer y filtrar el color</span><span class="toggle-mark" aria-hidden="true"></span></summary>
+            <p>Extraer el pigmento en un medio líquido, separar las fibras y ajustar el extracto. La espinaca se trabajó en frío para preservar su tono.</p>
+          </details>
+          <details name="fases">
+            <summary><span class="step-number">07–08</span><span>Formular la tinta</span><span class="toggle-mark" aria-hidden="true"></span></summary>
+            <p>Combinar el extracto con una base de agua y un espesante. Homogeneizar la mezcla para obtener un trazo continuo sobre el papel.</p>
+          </details>
+          <details name="fases">
+            <summary><span class="step-number">09–10</span><span>Envasar y evaluar</span><span class="toggle-mark" aria-hidden="true"></span></summary>
+            <p>Envasar en goteros etiquetados y revisar el color, la consistencia, la continuidad del trazo y el secado.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell evidence-section" id="resultados" aria-labelledby="evidence-title">
+      <div class="section-intro evidence-intro">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> Ensayos preliminares · 2026</p>
+          <h2 class="section-title" id="evidence-title">Lo que mostró <em>el papel.</em></h2>
+        </div>
+        <p>El equipo observó diferencias en la fluidez, el acabado y el cuidado que requiere cada tinta.</p>
+      </div>
+      <div class="results-list">
+        <article class="result-row carrot">
+          <span class="ink-chip" aria-hidden="true"></span><h3>Zanahoria</h3>
+          <p>Amarillo-anaranjado brillante, con fluidez media y secado en <strong>3–4 min</strong> sobre papel bond.</p>
+        </article>
+        <article class="result-row beet">
+          <span class="ink-chip" aria-hidden="true"></span><h3>Remolacha</h3>
+          <p>Rojo intenso a magenta, con trazo <strong>continuo y homogéneo</strong> durante la prueba preliminar.</p>
+        </article>
+        <article class="result-row spinach">
+          <span class="ink-chip" aria-hidden="true"></span><h3>Espinaca</h3>
+          <p>Verde oliva a vegetal. El extracto se obtuvo en frío y requiere <strong>protección frente a la luz</strong>.</p>
+        </article>
+      </div>
+      <p class="results-note">Queda pendiente medir la vida útil, la viscosidad y el color con instrumentos, y realizar pruebas piloto en el aula.</p>
+    </section>
+
+    <section class="section shell dossier-section" aria-labelledby="dossier-title">
+      <div class="dossier">
+        <div class="dossier-copy">
+          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> Ficha para evaluación</p>
+          <h2 class="section-title" id="dossier-title">Tinta vegetal<br> en <em>30 mL.</em></h2>
+          <p>La propuesta de gotero sirve para dosificar el pigmento en dibujos, caligrafía y manualidades. En la ficha puedes consultar el balance por lote, los costos directos estimados y las pruebas pendientes.</p>
+          <a class="button button-light" href="proyecto.html">Leer ficha del proyecto</a>
+        </div>
+        <figure class="dossier-image">
+          <img src="assets/prototipo.webp" width="712" height="1220" alt="Propuesta del informe para el frasco gotero de 30 mililitros de TintaNova." loading="lazy">
+          <figcaption>Propuesta de envase del proyecto</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="brand" href="#inicio" aria-label="TintaNova, volver al inicio">
+        <img src="assets/logo.webp" width="44" height="44" alt="">
+        <span>TintaNova<span class="brand-note">TINTA VEGETAL</span></span>
+      </a>
+      <p>Ingeniería Agroindustrial · Prácticas Integradoras II<br>Universidad Nacional Francisco Luis Espinoza Pineda · Nicaragua</p>
+      <a class="footer-link" href="proyecto.html">Ficha del proyecto</a>
+    </div>
+  </footer>
+</body>
+</html>
