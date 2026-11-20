@@ -6,7 +6,9 @@ Sitio del prototipo de tinta vegetal de Ingeniería Agroindustrial de la Univers
 
 Abre `index.html` en un navegador o sirve el directorio con un servidor estático. Puedes usar `python -m http.server 8000` y entrar en [localhost:8000](http://localhost:8000/). El sitio no requiere compilación, cuentas ni dependencias externas de ejecución.
 
-GitHub Pages sirve los archivos desde la raíz de la rama `main`.
+## Publicación
+
+[TintaNova en Render](https://tinta-nova.onrender.com/) se despliega desde la rama `main`. El comando `npm run build` prepara el directorio `dist` con los archivos públicos.
 
 ## Material visual
 
