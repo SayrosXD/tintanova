@@ -180,7 +180,6 @@ button:disabled { cursor: default; opacity: .55; }
 .lab-caption p { color: var(--muted); }
 .lab-caption .sample-name { color: var(--ink); font: 1.9rem/1.15 var(--serif); }
 .lab-actions { display: flex; gap: .5rem; flex-shrink: 0; }
-.lab-note { color: var(--muted); margin-top: .8rem; font-size: .88rem; }
 
 .process-section { background: #ece4d5; border-block: 1px solid var(--rule); }
 .process-grid { display: grid; grid-template-columns: 5fr 6fr; align-items: start; gap: clamp(2rem, 7.5vw, 8rem); }
@@ -212,9 +211,8 @@ button:disabled { cursor: default; opacity: .55; }
 .result-row { display: grid; grid-template-columns: 2.2rem minmax(8rem, .35fr) 1fr; gap: .95rem; align-items: center; border-bottom: 1px solid var(--rule); padding-block: 1.2rem; }
 .result-row .ink-chip { width: 1.7rem; height: 1.7rem; }
 .result-row h3 { font: 400 clamp(1.65rem, 3.5vw, 2.5rem)/1 var(--serif); }
-.result-row p, .results-note { color: var(--muted); }
+.result-row p { color: var(--muted); }
 .result-row strong { color: var(--ink); }
-.results-note { margin-top: 1rem; }
 
 .dossier { display: grid; grid-template-columns: 1fr .9fr; overflow: hidden; border-radius: .4rem; background: var(--ink); color: var(--paper-bright); }
 .dossier-copy { padding: clamp(1.65rem, 5vw, 4.35rem); }
